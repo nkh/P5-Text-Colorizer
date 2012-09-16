@@ -1,0 +1,1 @@
+run with command text_colorizer A<format>-f ANSI A<color>-c t/custom_colors.pl A<file>t/test_data_custom
