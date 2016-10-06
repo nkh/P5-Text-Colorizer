@@ -1,0 +1,8 @@
+*.swp
+Build
+!Build/
+Changes
+_build/
+blib/
+MYMETA.json
+MYMETA.yml

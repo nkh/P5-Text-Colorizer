@@ -258,6 +258,36 @@ $self->{LINE} = $line ;
 
 $self->CheckOptionNames(\%valid_argument, @setup_data) ;
 
+my (@ansi_rgb, @ansi_on_rgb, @html_rgb, @html_on_rgb) ;
+for my $blue (0 .. 5)
+        {
+        for my $green (0 .. 5)
+                {
+                for my $red (0 .. 5)
+                        {
+                        push @ansi_rgb, "rgb$red$green$blue" =>  "rgb$red$green$blue" ;
+                        push @ansi_on_rgb, "on_rgb$red$green$blue" =>  "on_rgb$red$green$blue" ;
+
+			my $hex = pack("WWW",$red, $green, $blue) ;
+
+			push @html_rgb, "rgb$red$green$blue" => "color:#$hex;  " ;
+			push @html_on_rgb, "on_rgb$red$green$blue" => "background-color:#$hex; " ;
+                        }
+                }
+        }
+	
+
+my (@ansi_greys, @ansi_on_greys, @html_greys, @html_on_greys) ;
+for my $grey (0 .. 16)
+	{
+	push @ansi_greys, "grey$grey" =>  "grey$grey" ;
+	push @ansi_on_greys, "on_grey$grey" =>  "on_grey$grey" ;
+
+	my $hex = pack("W",$grey) ;
+	push @html_greys, "grey$grey" => "color:#$hex$hex$hex; " ;
+	push @html_on_greys, "on_grey$grey" => "background-color:#$hex$hex$hex; " ;
+	}
+
 %{$self} = 
 	(
 	NAME                   => 'Anonymous',
@@ -313,6 +343,10 @@ $self->CheckOptionNames(\%valid_argument, @setup_data) ;
 			on_bright_red => 'on_bright_red',
 			on_bright_blue => 'on_bright_blue',
 			on_bright_magenta => 'on_bright_magenta',
+			@ansi_rgb,
+			@ansi_on_rgb,
+			@ansi_greys,
+			@ansi_on_greys,
 			},
 			
 		HTML =>
@@ -355,6 +389,11 @@ $self->CheckOptionNames(\%valid_argument, @setup_data) ;
 			on_bright_red => 'background-color:#f00; ',
 			on_bright_blue => 'background-color:#00f; ',
 			on_bright_magenta => 'background-color:#f0f; ',
+
+			@html_rgb,
+			@html_on_rgb,
+			@html_greys,
+			@html_on_greys,
 			},
 		},
 
